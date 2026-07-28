@@ -77,6 +77,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "UnequipLantern",
+                    "type": "Button",
+                    "id": "a08a7b1b-d966-4ed9-aa3f-f7da1b131a90",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -440,6 +449,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cc76d1e4-05cf-46c2-9dc5-1738c0a9159c",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UnequipLantern",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

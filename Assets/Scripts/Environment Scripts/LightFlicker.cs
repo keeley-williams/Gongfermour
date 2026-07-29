@@ -17,7 +17,7 @@ public class LightFlicker : MonoBehaviour
         while (inf)
         {
             float startIntensity = light.intensity;
-            float targetIntensity = Random.Range(25f, 50f);
+            float targetIntensity = Random.Range(4f, 8f);
 
             float startRange = light.range;
             float targetRange = Random.Range(2, 7);

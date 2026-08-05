@@ -12,6 +12,7 @@ public class NormalEnemyState : AIState
 
     public override void Enter()
     {
+        Debug.Log("First random point");
         MoveToRandomPoint();
     }
 
@@ -22,16 +23,18 @@ public class NormalEnemyState : AIState
 
         if (vision != null && vision.CanSeePlayer())
         {
+            Debug.Log("Can see player)");
             enemy.target = PlayerLocator.Player;
 
             enemy.ChangeState(new ChaseState(enemy));
             return;
         }
 
-        // Patrol logic
         if (!enemy.agent.pathPending &&
-            enemy.agent.remainingDistance < 1f)
+            enemy.agent.hasPath &&
+            enemy.agent.remainingDistance <= enemy.agent.stoppingDistance)
         {
+            Debug.Log("Pathfinding new point");
             MoveToRandomPoint();
         }
     }
@@ -40,19 +43,28 @@ public class NormalEnemyState : AIState
     {
         Vector3 origin = enemy.transform.position;
 
-        Vector3 randomPoint =
-            origin + Random.insideUnitSphere * 8f;
+        Vector2 randomCircle = Random.insideUnitCircle * 8f;
+
+        Vector3 randomPoint = new Vector3(
+            origin.x + randomCircle.x,
+            origin.y,
+            origin.z + randomCircle.y
+        );
+        Debug.Log("Random circle position is: " + randomPoint);
+
+        if (Vector3.Distance(origin, randomPoint) < 3f)
+        {
+            MoveToRandomPoint();
+            return;
+        }
 
         NavMeshHit hit;
 
-        if (NavMesh.SamplePosition(
-            randomPoint,
-            out hit,
-            8f,
-            NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(randomPoint, out hit, 8f, NavMesh.AllAreas))
         {
             patrolPoint = hit.position;
             enemy.agent.SetDestination(patrolPoint);
         }
+        Debug.Log("Moved to new random position");
     }
 }

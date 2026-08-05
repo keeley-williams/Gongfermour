@@ -12,7 +12,6 @@ public class EnemyAI : MonoBehaviour
 
     public AIState currentState;
 
-
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -25,7 +24,7 @@ public class EnemyAI : MonoBehaviour
         switch(profile.behaviour)
         {
             case AIBehaviour.Normal:
-                ChangeState(new PatrolState(this));
+                ChangeState(new NormalEnemyState(this));
                 break;
 
             case AIBehaviour.Stalker:
@@ -57,14 +56,12 @@ public void HearNoise(Vector3 position, NoiseType type)
                 ChangeState(
                     new SearchState(this, position)
                 );
-
                 break;
 
             case NoiseType.Door:
                 ChangeState(
                     new SearchState(this, position)
                 );
-
                 break;
 
             case NoiseType.Weapon:
@@ -72,7 +69,6 @@ public void HearNoise(Vector3 position, NoiseType type)
                 ChangeState(
                     new ChaseState(this)
                 );
-
                 break;
 
             case NoiseType.Explosion:
@@ -80,7 +76,6 @@ public void HearNoise(Vector3 position, NoiseType type)
                 ChangeState(
                     new SearchState(this, position)
                 );
-
                 break;
         }
     }

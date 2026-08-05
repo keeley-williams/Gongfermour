@@ -7,13 +7,14 @@ public class Vision : MonoBehaviour
     void Awake()
     {
         enemy = GetComponent<EnemyAI>();
+        PlayerLocator.GetPosition();
     }
 
     public bool CanSeePlayer()
     {
         if (PlayerLocator.Player == null)
             return false;
-
+        PlayerLocator.GetPosition();
         Vector3 origin = transform.position;
 
         Vector3 direction =

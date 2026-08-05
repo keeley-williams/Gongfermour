@@ -15,7 +15,6 @@ public class ChaseState : AIState
         if (enemy.target == null)
             return;
 
-
         enemy.agent.SetDestination(
             enemy.target.position
         );

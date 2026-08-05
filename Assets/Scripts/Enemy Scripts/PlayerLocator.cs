@@ -6,7 +6,7 @@ public class PlayerLocator : MonoBehaviour
     public static Vector3 newPosition;
 
     //Need this offset as set up of player model is offset and effecting the vision system
-    public static Vector3 positionOffset = new Vector3 (0, -15f, 0); 
+    public static Vector3 positionOffset = new Vector3 (0, -1f , 0); 
 
     void Awake()
     {

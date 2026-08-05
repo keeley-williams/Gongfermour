@@ -1,5 +1,5 @@
+using Unity.VisualScripting;
 using UnityEngine;
-
 
 public class StalkerState : AIState
 {
@@ -9,22 +9,39 @@ public class StalkerState : AIState
 
     public override void Enter()
     {
-    timer = 8;
+        Debug.Log("Entered stalker state!");
+        timer = 8;
     }
 
     public override void UpdateState()
     {
-        timer -= Time.deltaTime;
-        if(timer <=0)
+        // ALWAYS use the Vision component once (no GetComponent spam)
+        Vision vision = enemy.GetComponent<Vision>();
+
+        if (vision != null && vision.CanSeePlayer())
         {
+            Debug.Log("Can see player)");
+            enemy.target = PlayerLocator.Player;
 
-        Vector3 offset = Random.insideUnitSphere * 10;
-
-        enemy.agent.SetDestination(
-        enemy.target.position + offset);
-
+            enemy.ChangeState(new ChaseState(enemy));
+            return;
         }
 
-    }
+        timer -= Time.deltaTime;
 
+        if(timer <=0)
+        {
+            Vector2 randCirc = Random.insideUnitCircle * 10;
+            Vector3 offset = new Vector3(
+                randCirc.x,
+                0,
+                randCirc.y
+            );
+
+            enemy.agent.SetDestination(
+            enemy.target.position + offset);
+
+            timer = 8;
+        }
+    }
 }

@@ -54,6 +54,6 @@ public class VisionDebug : MonoBehaviour
 
         Gizmos.color = detected ? detectedColor : blockedColor;
 
-        Gizmos.DrawLine(origin, player.position + Vector3.up * 1.5f);
+        Gizmos.DrawLine(origin, PlayerLocator.GetPosition() + Vector3.up * 1.5f);
     }
 }

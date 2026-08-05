@@ -1,12 +1,9 @@
 using UnityEngine;
 
-
 public class SearchState : AIState
 {
     Vector3 searchPosition;
-
     float timer = 5f;
-
 
     public SearchState(
         EnemyAI enemy,
@@ -16,7 +13,6 @@ public class SearchState : AIState
         searchPosition = position;
     }
 
-
     public override void Enter()
     {
         enemy.agent.SetDestination(
@@ -24,11 +20,9 @@ public class SearchState : AIState
         );
     }
 
-
     public override void UpdateState()
     {
         timer -= Time.deltaTime;
-
 
         if (timer <= 0)
         {
@@ -36,7 +30,6 @@ public class SearchState : AIState
                 new PatrolState(enemy)
             );
         }
-
 
         if (enemy.GetComponent<Vision>()
             .CanSeePlayer())

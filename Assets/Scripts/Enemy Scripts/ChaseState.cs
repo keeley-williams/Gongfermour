@@ -19,13 +19,11 @@ public class ChaseState : AIState
             enemy.target.position
         );
 
-
         float distance =
             Vector3.Distance(
                 enemy.transform.position,
                 enemy.target.position
             );
-
 
         if (distance <= enemy.profile.attackRange)
         {
@@ -33,7 +31,6 @@ public class ChaseState : AIState
                 new AttackState(enemy)
             );
         }
-
 
         if (!enemy.GetComponent<Vision>().CanSeePlayer())
         {
